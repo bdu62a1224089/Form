@@ -2,81 +2,84 @@
 <html>
 <head>
   <title>Login Form</title>
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <script>
-    (function(){
-      emailjs.init("uq1xLqPIAEBJxM1ss"); // ✅ Your Public Key
-    })();
-
-    function validateAndSend(e) {
-      e.preventDefault();
-
-      // Get form values
-      const name = document.getElementById('name').value.trim();
-      const father = document.getElementById('father').value.trim();
-      const dob = document.getElementById('dob').value;
-      const mobile = document.getElementById('mobile').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const address = document.getElementById('address').value.trim();
-      const qualification = document.getElementById('qualification').value.trim();
-
-      // Simple validation
-      if (!name || !father || !dob || !mobile || !email || !address || !qualification) {
-        alert("⚠️ Please fill in all the fields.");
-        return;
-      }
-
-      if (!/^\d{10}$/.test(mobile)) {
-        alert("⚠️ Please enter a valid 10-digit mobile number.");
-        return;
-      }
-
-      const templateParams = {
-        name,
-        father,
-        dob,
-        mobile,
-        email,
-        address,
-        qualification
-      };
-
-      // ✅ Sending email via EmailJS
-      emailjs.send("service_jx5xf5g", "template_95ajsgo", templateParams)
-        .then(() => {
-          alert("✅ Form submitted successfully!");
-          document.getElementById('loginForm').reset();
-        }, (error) => {
-          alert("❌ Failed to send! Error: " + JSON.stringify(error));
-        });
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
     }
-  </script>
+
+    h2 {
+      color: #333;
+    }
+
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
+
   <h2>Login Form</h2>
-  <form id="loginForm" onsubmit="validateAndSend(event)">
-    <label>Name:</label><br>
-    <input type="text" id="name" name="name"><br><br>
 
-    <label>Father's Name:</label><br>
-    <input type="text" id="father" name="father"><br><br>
+  <form action="https://getform.io/f/ayveppdb" method="POST">
+    
+    <label for="name">Name:</label>
+    <input type="text" name="name" required>
 
-    <label>Date of Birth:</label><br>
-    <input type="date" id="dob" name="dob"><br><br>
+    <label for="father">Father's Name:</label>
+    <input type="text" name="father" required>
 
-    <label>Mobile Number:</label><br>
-    <input type="text" id="mobile" name="mobile" maxlength="10"><br><br>
+    <label for="dob">Date of Birth:</label>
+    <input type="date" name="dob" required>
 
-    <label>Email ID:</label><br>
-    <input type="email" id="email" name="email"><br><br>
+    <label for="mobile">Mobile Number:</label>
+    <input type="text" name="mobile" pattern="\d{10}" title="Enter 10 digit mobile number" required>
 
-    <label>Address:</label><br>
-    <textarea id="address" name="address" rows="3" cols="30"></textarea><br><br>
+    <label for="email">Email ID:</label>
+    <input type="email" name="email" required>
 
-    <label>Qualification:</label><br>
-    <input type="text" id="qualification" name="qualification"><br><br>
+    <label for="address">Address:</label>
+    <textarea name="address" rows="3" required></textarea>
+
+    <label for="qualification">Qualification:</label>
+    <input type="text" name="qualification" required>
 
     <button type="submit">Submit</button>
+
   </form>
+
 </body>
 </html>
