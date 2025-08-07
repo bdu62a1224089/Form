@@ -1,48 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login Form</title>
+  <title>Login Form with Resume Upload</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f2f2f2;
+      background: #f4f4f4;
       padding: 20px;
-    }
-
-    h2 {
-      color: #333;
     }
 
     form {
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 500px;
+      background: white;
+      max-width: 600px;
       margin: auto;
+      padding: 25px;
+      border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
     label {
+      display: block;
+      margin-top: 10px;
       font-weight: bold;
     }
 
-    input, textarea {
+    input, textarea, button {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
       margin-bottom: 15px;
-      border: 1px solid #ccc;
       border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
     }
 
     button {
       background-color: #007BFF;
       color: white;
-      padding: 12px 20px;
       border: none;
-      border-radius: 5px;
       cursor: pointer;
-      width: 100%;
+      font-size: 16px;
     }
 
     button:hover {
@@ -54,32 +56,54 @@
 
   <h2>Login Form</h2>
 
-  <form action="https://getform.io/f/ayveppdb" method="POST">
-    
+  <form action="https://getform.io/f/ayveppdb" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+
     <label for="name">Name:</label>
-    <input type="text" name="name" required>
+    <input type="text" name="name" id="name" required>
 
     <label for="father">Father's Name:</label>
-    <input type="text" name="father" required>
+    <input type="text" name="father" id="father" required>
 
     <label for="dob">Date of Birth:</label>
-    <input type="date" name="dob" required>
+    <input type="date" name="dob" id="dob" required>
 
     <label for="mobile">Mobile Number:</label>
-    <input type="text" name="mobile" pattern="\d{10}" title="Enter 10 digit mobile number" required>
+    <input type="text" name="mobile" id="mobile" pattern="\d{10}" title="Enter a valid 10-digit mobile number" required>
 
     <label for="email">Email ID:</label>
-    <input type="email" name="email" required>
+    <input type="email" name="email" id="email" required>
 
     <label for="address">Address:</label>
-    <textarea name="address" rows="3" required></textarea>
+    <textarea name="address" id="address" rows="3" required></textarea>
 
     <label for="qualification">Qualification:</label>
-    <input type="text" name="qualification" required>
+    <input type="text" name="qualification" id="qualification" required>
+
+    <label for="resume">Upload Your Resume:</label>
+    <input type="file" name="resume" id="resume" accept=".pdf,.doc,.docx" required>
 
     <button type="submit">Submit</button>
-
   </form>
+
+  <script>
+    function validateForm() {
+      const mobile = document.getElementById('mobile').value;
+      const resume = document.getElementById('resume').value;
+
+      if (!/^\d{10}$/.test(mobile)) {
+        alert("Please enter a valid 10-digit mobile number.");
+        return false;
+      }
+
+      const allowedExtensions = /(\.pdf|\.doc|\.docx)$/i;
+      if (!allowedExtensions.exec(resume)) {
+        alert("Please upload a file in PDF, DOC, or DOCX format.");
+        return false;
+      }
+
+      return true; // Submit form
+    }
+  </script>
 
 </body>
 </html>
