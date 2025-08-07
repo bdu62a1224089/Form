@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login Form with Resume Upload</title>
+  <title>Work Application & Resume Upload Form</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      background: #f2f2f2;
       padding: 20px;
     }
 
@@ -21,30 +21,31 @@
     h2 {
       text-align: center;
       color: #333;
+      margin-bottom: 20px;
     }
 
     label {
+      font-weight: bold;
       display: block;
       margin-top: 10px;
-      font-weight: bold;
     }
 
-    input, textarea, button {
+    input, textarea, button, select {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
       margin-bottom: 15px;
-      border-radius: 5px;
       border: 1px solid #ccc;
+      border-radius: 5px;
       box-sizing: border-box;
     }
 
     button {
       background-color: #007BFF;
       color: white;
+      font-size: 16px;
       border: none;
       cursor: pointer;
-      font-size: 16px;
     }
 
     button:hover {
@@ -54,7 +55,7 @@
 </head>
 <body>
 
-  <h2>Login Form</h2>
+  <h2>Work Application & Resume Upload Form</h2>
 
   <form action="https://getform.io/f/ayveppdb" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
 
@@ -68,7 +69,7 @@
     <input type="date" name="dob" id="dob" required>
 
     <label for="mobile">Mobile Number:</label>
-    <input type="text" name="mobile" id="mobile" pattern="\d{10}" title="Enter a valid 10-digit mobile number" required>
+    <input type="text" name="mobile" id="mobile" pattern="\d{10}" title="Enter 10-digit mobile number" required>
 
     <label for="email">Email ID:</label>
     <input type="email" name="email" id="email" required>
@@ -79,10 +80,13 @@
     <label for="qualification">Qualification:</label>
     <input type="text" name="qualification" id="qualification" required>
 
+    <label for="experience">Experience (in years):</label>
+    <input type="number" name="experience" id="experience" min="0" max="50" required>
+
     <label for="resume">Upload Your Resume:</label>
     <input type="file" name="resume" id="resume" accept=".pdf,.doc,.docx" required>
 
-    <button type="submit">Submit</button>
+    <button type="submit">Submit Application</button>
   </form>
 
   <script>
@@ -90,18 +94,20 @@
       const mobile = document.getElementById('mobile').value;
       const resume = document.getElementById('resume').value;
 
+      // Validate 10-digit mobile number
       if (!/^\d{10}$/.test(mobile)) {
         alert("Please enter a valid 10-digit mobile number.");
         return false;
       }
 
+      // Validate resume file type
       const allowedExtensions = /(\.pdf|\.doc|\.docx)$/i;
       if (!allowedExtensions.exec(resume)) {
         alert("Please upload a file in PDF, DOC, or DOCX format.");
         return false;
       }
 
-      return true; // Submit form
+      return true; // Allow form to submit
     }
   </script>
 
